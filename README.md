@@ -44,3 +44,7 @@ This point is really important and will be marked as a @TODO:
 We can improve the tests by adding more test for composables, and scenarios to ensure the application is robust and reliable. We can also add more integration tests to cover the entire application flow.
 
 ### Pagination
+
+Backend API Modification:
+We'll ensure that our backend API can handle requests for paginated data. Currently, the backend has no proper support for pagination.
+Usually this involves accepting `page` and `limit` (or `offset` and `limit`) parameters and returning the current slice of data along with metadata necessary for pagination, such as `total records`.

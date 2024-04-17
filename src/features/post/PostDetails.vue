@@ -24,13 +24,31 @@
 </template>
 
 <script setup lang="ts">
+import { watch, onMounted, onUnmounted } from 'vue';
 import { useRoute } from 'vue-router';
 import MarkdownViewer from '@/components/MarkdownViewer.vue';
 import PostDetailsSkeleton from '@/features/post/PostDetailsSkeleton.vue';
 import { useGetPost } from '@/features/post/composables/useGetPost';
 import PostCardPopover from '@/features/post/PostCardPopover.vue';
+import { t } from '@/localization/translate';
 
 const route = useRoute();
 const postId = route.params.id;
 const { isLoading, error, post } = useGetPost(`${postId}`);
+
+watch(
+  () => post.value?.title,
+  (newTitle) => {
+    if (newTitle) {
+      document.title = newTitle;
+    }
+  },
+  { immediate: true },
+);
+
+onMounted(() => {
+  onUnmounted(() => {
+    document.title = t('appName');
+  });
+});
 </script>
