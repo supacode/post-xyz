@@ -7,6 +7,11 @@ This app built using Vite/VueJS3, styled with Tailwind and uses Vue Query for da
 - CD into project root directory `npm install`.
 - `npm start` to run project.
 
+## Testing
+
+- Unit tests `npm run test:unit`.
+- E2E tests `npm run test:e2e`.
+
 ## Folder Structure 🗂️
 
 - The frontend codebase is organized using a modular architecture, with each feature or component having its own directory containing the necessary files. This structure promotes code reusability, maintainability, and scalability.
