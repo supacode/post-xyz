@@ -17,12 +17,13 @@
       "success": "Post deleted successfully!"
     },
     "fetchError": "Error fetching posts. Please refresh the page.",
+    "noPosts": "No posts yet. Create your first post!",
+    "postNotFound": "Post not found.",
     "update": {
       "buttonText": "Update Post",
       "error": "Failed to update post. Please try again.",
       "link": "Edit",
       "success": "Post updated successfully!"
     }
-  },
-  "ui": {}
+  }
 }

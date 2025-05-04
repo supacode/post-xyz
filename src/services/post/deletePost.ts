@@ -1,5 +1,6 @@
-import { axiosInstance } from '../axios';
+import { db, simulateLatency } from '../db';
 
 export const deletePost = async (id: number): Promise<void> => {
-  await axiosInstance.delete(`/posts/${id}`);
+  await simulateLatency();
+  await db.posts.delete(id);
 };

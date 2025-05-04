@@ -27,7 +27,6 @@
 <script setup lang="ts">
 import AppLink from '@/components/ui/AppLink.vue';
 import { PenIcon } from '@/assets/icons';
-import { t } from '@/localization/translate';
 
 const { includeNav } = withDefaults(
   defineProps<{

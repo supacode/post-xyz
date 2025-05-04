@@ -35,6 +35,7 @@
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { push } from 'notivue';
+import { useQueryClient } from '@tanstack/vue-query';
 
 import AppPopover from '@/components/ui/AppPopover.vue';
 import { deletePost } from '@/services/post/deletePost';
@@ -49,12 +50,14 @@ const { post } = defineProps<{
   post: Post;
 }>();
 const router = useRouter();
+const queryClient = useQueryClient();
 const popoverVisible = ref(false);
 
 const { isLoading, mutate } = useAppMutation({
-  mutationFn: () => deletePost(post.id),
+  mutationFn: (variables: unknown) => deletePost(variables as number),
   onSuccess: () => {
     popoverVisible.value = false;
+    queryClient.invalidateQueries({ queryKey: ['posts'] });
     push.success(t('postActions.delete.success'));
     router.push('/');
   },
@@ -66,7 +69,9 @@ const { isLoading, mutate } = useAppMutation({
 
 const onDelete = () => {
   if (confirm(t('postActions.delete.confirmation'))) {
-    mutate();
+    if (post.id) {
+      mutate(post.id);
+    }
   }
 };
 </script>

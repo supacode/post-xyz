@@ -1,5 +1,4 @@
-import type { Post } from '@/types/Post';
-import { axiosInstance } from '../axios';
+import { db, simulateLatency } from '../db';
 
 export const updatePost = async ({
   id,
@@ -9,8 +8,8 @@ export const updatePost = async ({
   id: string;
   title: string;
   body: string;
-}): Promise<Post> => {
-  const { data } = await axiosInstance.patch<Post>(`/posts/${id}`, { title, body });
-
-  return data;
+}): Promise<number> => {
+  await simulateLatency();
+  const updatedCount = await db.posts.update(Number(id), { title, body });
+  return updatedCount;
 };

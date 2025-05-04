@@ -5,6 +5,10 @@
     {{ $t('postActions.fetchError') }}
   </p>
 
+  <p v-else-if="!post">
+    {{ $t('postActions.postNotFound') }}
+  </p>
+
   <form @submit.prevent="handleFormSubmit" v-else-if="post" class="bg-gray-200 p-4 rounded-xl">
     <AppInput
       v-model="postTitle"
@@ -55,8 +59,8 @@ import ArrowBack from '@/assets/icons/ArrowBack.vue';
 import { useGetPost } from '@/features/post/composables/useGetPost';
 import PostDetailsSkeleton from '@/features/post/PostDetailsSkeleton.vue';
 import { useAppMutation } from '@/composables/useAppMutation';
-import { t } from '@/localization/translate';
 import AppLink from '@/components/ui/AppLink.vue';
+import { t } from '@/localization/translate';
 
 const postTitle = ref('');
 const postContent = ref('');
@@ -91,8 +95,6 @@ const { isLoading: isUpdating, mutate } = useAppMutation({
       body: postContent.value,
     }),
   onSuccess: () => {
-    // In a real-world application, we might want to redirect to the newly created post,
-    // but since JsonPlaceholder doesn't persist, we are redirecting to the home page instead.
     push.success(t('postActions.update.success'));
     router.push('/');
   },

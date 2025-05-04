@@ -1,5 +1,4 @@
-import type { Post } from '@/types/Post';
-import { axiosInstance } from '../axios';
+import { db, simulateLatency } from '../db';
 
 export const createPost = async ({
   title,
@@ -7,12 +6,8 @@ export const createPost = async ({
 }: {
   title: string;
   body: string;
-}): Promise<Post> => {
-  const { data } = await axiosInstance.post<Post>('/posts', { title, body });
-
-  return data;
-};
-
-const deletePost = async (id: number): Promise<void> => {
-  await axiosInstance.delete(`/posts/${id}`);
+}): Promise<number> => {
+  await simulateLatency();
+  const id = await db.posts.add({ title, body });
+  return id;
 };

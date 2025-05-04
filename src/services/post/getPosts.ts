@@ -1,17 +1,13 @@
-import { axiosInstance } from '../axios';
+import { db, simulateLatency } from '../db';
 import { type Post } from '@/types/Post';
 
-interface PostQueryParams {
-  _limit?: number;
-  _page?: number;
-}
-
-export const getPosts = async (params?: PostQueryParams): Promise<Post[]> => {
-  const response = await axiosInstance.get('/posts', {
-    params: {
-      ...params,
-    },
-  });
-
-  return response.data;
+export const getPosts = async (): Promise<Post[]> => {
+  try {
+    await simulateLatency();
+    const posts = await db.posts.toArray();
+    return posts;
+  } catch (error) {
+    console.error('Error fetching posts:', error);
+    throw error;
+  }
 };

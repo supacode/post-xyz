@@ -1,50 +1,40 @@
 describe('Blog Operations', () => {
-  const landingPage = 'http://localhost:5173/';
-  const blogServiceUri = 'https://jsonplaceholder.typicode.com/posts';
+  const landingPage = 'http://localhost:5175/';
 
   beforeEach(() => {
     cy.visit(landingPage);
   });
 
   it('Creates a new blog post', () => {
-    cy.intercept('POST', blogServiceUri, {
-      statusCode: 201,
-      body: {
-        id: 124,
-        title: 'new post',
-        content: 'new post content',
-      },
-    }).as('createPost');
     cy.contains('a', 'Create Post').click();
     cy.get('input[name="title"]').type('New Cypress Post');
     cy.get('div[contenteditable="true"]').type('This is a blog post created by Cypress testing.');
     cy.get('button[type="submit"]').click();
-    cy.wait('@createPost');
+
     cy.get('[data-notivue="success"]').should('exist');
+
+    cy.url().should('eq', landingPage);
+
+    cy.contains('New Cypress Post').should('exist');
   });
 
   it('Deletes a blog post', () => {
-    cy.intercept('DELETE', `${blogServiceUri}/*`, {
-      statusCode: 200,
-      body: { message: 'Post deleted successfully' },
-    }).as('deletePost');
+    cy.get('h2')
+      .first()
+      .invoke('text')
+      .then((postTitle) => {
+        cy.get('[aria-label="popover"]:first button').click();
+        cy.get('[aria-label="Delete post"]').click();
 
-    cy.get('[aria-label="popover"]:first button').click();
-    cy.get('[aria-label="Delete post"]').click();
-    cy.wait('@deletePost');
-    cy.get('[data-notivue="success"]').should('exist');
+        cy.get('[data-notivue="success"]').should('exist');
+
+        cy.url().should('eq', landingPage);
+
+        cy.contains(postTitle).should('not.exist');
+      });
   });
 
   it('Updates an existing blog post', () => {
-    cy.intercept('PATCH', `${blogServiceUri}/*`, {
-      statusCode: 200,
-      body: {
-        id: 1,
-        title: 'new post',
-        content: 'new post content',
-      },
-    }).as('updatePost');
-
     cy.get('[aria-label="popover"]:first button').click();
     cy.get('[aria-label="Edit Post"]').click();
 
@@ -55,21 +45,24 @@ describe('Blog Operations', () => {
     cy.get('div[contenteditable="true"]').type('Updated content.');
 
     cy.get('form').submit();
-    cy.wait('@updatePost');
+
     cy.get('[data-notivue="success"]').should('exist');
+
+    cy.url().should('eq', landingPage);
+
+    cy.contains('Updated Title').should('exist');
   });
 
   it('Displays a blog post', () => {
-    cy.intercept('GET', `${blogServiceUri}/1`, {
-      statusCode: 200,
-      body: { id: 1, title: 'abc', body: 'abc content' },
-    }).as('getPost');
+    cy.get('h2')
+      .first()
+      .invoke('text')
+      .then((postTitle) => {
+        cy.contains('h2', postTitle).click();
 
-    cy.visit(`${landingPage}posts/1`);
+        cy.url().should('include', '/posts/');
 
-    cy.wait('@getPost');
-
-    cy.get('h2').should('have.text', 'abc');
-    cy.get('div[title="abc"]').should('have.text', 'abc content');
+        cy.get('h2').should('contain.text', postTitle);
+      });
   });
 });
