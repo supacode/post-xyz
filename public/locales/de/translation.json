@@ -1,0 +1,30 @@
+{
+  "appName": "Minimum",
+  "postActions": {
+    "create": {
+      "buttonText": "Veröffentlichen",
+      "cancelButton": "Verwerfen",
+      "cancelConfirmation": "Möchten Sie diesen Beitrag wirklich verwerfen?",
+      "error": "Beitrag konnte nicht erstellt werden. Bitte versuchen Sie es erneut.",
+      "link": "Beitrag erstellen",
+      "success": "Beitrag erfolgreich erstellt!",
+      "titlePlaceholder": "Beitragstitel"
+    },
+    "delete": {
+      "buttonText": "Löschen",
+      "confirmation": "Möchten Sie diesen Beitrag wirklich löschen?",
+      "error": "Beitrag konnte nicht gelöscht werden. Bitte versuchen Sie es erneut.",
+      "success": "Beitrag erfolgreich gelöscht!"
+    },
+    "fetchError": "Fehler beim Laden der Beiträge. Bitte laden Sie die Seite neu.",
+    "noPosts": "Noch keine Beiträge. Erstellen Sie Ihren ersten Beitrag!",
+    "postNotFound": "Beitrag nicht gefunden.",
+    "update": {
+      "buttonText": "Beitrag aktualisieren",
+      "cancelEdit": "Abbrechen",
+      "error": "Beitrag konnte nicht aktualisiert werden. Bitte versuchen Sie es erneut.",
+      "link": "Bearbeiten",
+      "success": "Beitrag erfolgreich aktualisiert!"
+    }
+  }
+}

@@ -7,12 +7,6 @@
 
   <div v-else-if="data && data.length === 0" class="text-center py-8">
     <p class="text-gray-500 text-lg mb-4">{{ $t('postActions.noPosts') }}</p>
-    <AppLink to="/posts/create" variant="primary">
-      <template #icon>
-        <PenIcon />
-      </template>
-      {{ $t('postActions.create.link') }}
-    </AppLink>
   </div>
 
   <template v-else-if="data">
@@ -29,7 +23,7 @@ import { useQuery } from '@tanstack/vue-query';
 import { getPosts } from '@/services/post/getPosts';
 import PostCard from '@/features/post/PostCard.vue';
 import PostCardSkeleton from '@/features/post/PostCardSkeleton.vue';
-import AppLink from '@/components/ui/AppLink.vue';
+import AppLink from '@/components/ui/AppLink/AppLink.vue';
 import { PenIcon } from '@/assets/icons';
 
 const { data: unsortedData, isLoading } = useQuery({

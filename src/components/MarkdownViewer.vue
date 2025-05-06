@@ -3,10 +3,5 @@
 </template>
 
 <script lang="ts" setup>
-const { markdown } = defineProps({
-  markdown: {
-    type: String,
-    default: '',
-  },
-});
+const { markdown } = defineProps({ markdown: { type: String, default: '' } });
 </script>

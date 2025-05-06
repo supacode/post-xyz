@@ -1,26 +1,18 @@
 import { describe, it, expect, vi } from 'vitest';
 import { mount } from '@vue/test-utils';
-import AppButton from '../AppButton.vue';
+import AppButton from './AppButton.vue';
 
 describe('AppButton', () => {
   it('renders button with text', () => {
-    const wrapper = mount(AppButton, {
-      slots: {
-        default: 'abc',
-      },
-    });
+    const wrapper = mount(AppButton, { slots: { default: 'abc' } });
 
     expect(wrapper.text()).toBe('abc');
   });
 
   it('renders button with icon ', () => {
     const wrapper = mount(AppButton, {
-      props: {
-        title: 'abc',
-      },
-      slots: {
-        icon: '<svg role="img">icon</svg>',
-      },
+      props: { title: 'abc' },
+      slots: { icon: '<svg role="img">icon</svg>' },
     });
 
     expect(wrapper.find(`[role='img']`).exists()).toBe(true);
@@ -29,12 +21,7 @@ describe('AppButton', () => {
 
   it('renders with an onclick', async () => {
     const fn = vi.fn();
-    const wrapper = mount(AppButton, {
-      props: {
-        title: 'abc',
-        onClick: fn,
-      },
-    });
+    const wrapper = mount(AppButton, { props: { title: 'abc', onClick: fn } });
 
     await wrapper.find('button').trigger('click');
 
@@ -42,12 +29,7 @@ describe('AppButton', () => {
   });
 
   it('displays spinner if loading', async () => {
-    const wrapper = mount(AppButton, {
-      props: {
-        title: 'abc',
-        isLoading: true,
-      },
-    });
+    const wrapper = mount(AppButton, { props: { title: 'abc', isLoading: true } });
 
     expect(wrapper.find(`[role='img']`).exists()).toBe(true);
   });

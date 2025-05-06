@@ -1,6 +1,6 @@
 # POST CRUD
 
-This app built using Vite/VueJS3, styled with Tailwind and uses Vue Query for data fetching.
+This app built using Vite/VueJS3, styled with Tailwind and uses Vue Query for data fetching. The app uses IndexedDB with Dexie.js for local data storage.
 
 ## Installation
 
@@ -11,6 +11,10 @@ This app built using Vite/VueJS3, styled with Tailwind and uses Vue Query for da
 
 - Unit tests `npm run test:unit`.
 - E2E tests `npm run test:e2e`.
+
+## Storybook
+
+- Run Storybook `npm run storybook` to start the development server on port 6006.
 
 ## Folder Structure 🗂️
 
@@ -41,6 +45,15 @@ We are using Vue Query for data fetching and state management, we opted for this
 
 4. **Reduced Boilerplate**: By handling data fetching and caching internally, Vue Query reduces the amount of boilerplate code developers need to write. This allows us to focus on building features and business logic rather than worrying about the intricacies of state management and data synchronization.
 
+### Data Storage 💾
+
+The application uses IndexedDB with Dexie.js for local data storage. This provides:
+
+- Persistent local storage for posts and user data
+- Offline functionality
+- No need for a backend server
+- Fast data access and querying capabilities
+
 ## Improvements
 
 ### Testing 🧪
@@ -50,6 +63,10 @@ We can improve the tests by adding more test for composables, and scenarios to e
 
 ### Pagination
 
-Backend API Modification:
-We'll ensure that our backend API can handle requests for paginated data. Currently, the backend has no proper support for pagination.
-Usually this involves accepting `page` and `limit` (or `offset` and `limit`) parameters and returning the current slice of data along with metadata necessary for pagination, such as `total records`.
+Local Data Pagination:
+We can implement pagination for the local data stored in IndexedDB. This would involve:
+
+- Adding pagination parameters to data queries
+- Implementing efficient data slicing and limiting
+- Adding pagination controls to the UI
+- Optimizing performance for large datasets

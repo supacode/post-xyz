@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { mount } from '@vue/test-utils';
-import AppInput from '../AppInput.vue';
+import AppInput from './AppInput.vue';
 
 describe('AppInput', () => {
   it('renders with default properties', () => {
@@ -43,11 +43,7 @@ describe('AppInput', () => {
   });
 
   it('does not emit update:modelValue when disabled', async () => {
-    const wrapper = mount(AppInput, {
-      props: {
-        disabled: true,
-      },
-    });
+    const wrapper = mount(AppInput, { props: { disabled: true } });
     const input = wrapper.find('input');
     await input.setValue('New value');
     expect(wrapper.emitted('update:modelValue')).toBeFalsy();

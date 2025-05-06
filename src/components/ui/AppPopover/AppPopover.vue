@@ -20,9 +20,7 @@ import { ref, watch } from 'vue';
 import { useClickOutside } from '@/composables/useClickOutside';
 import { useKeyPress } from '@/composables/useKeyPress';
 
-const props = defineProps({
-  modelValue: Boolean,
-});
+const props = defineProps({ modelValue: Boolean });
 
 const isVisible = ref(props.modelValue);
 const popoverRef = ref<HTMLDivElement | null>(null);
@@ -35,10 +33,7 @@ const updateVisibility = (value: boolean) => {
 
 const toggleVisibility = () => updateVisibility(!isVisible.value);
 
-useClickOutside({
-  elementRef: popoverRef,
-  callback: () => updateVisibility(false),
-});
+useClickOutside({ elementRef: popoverRef, callback: () => updateVisibility(false) });
 
 useKeyPress({ targetKey: 'Escape', callback: () => updateVisibility(false) });
 

@@ -16,7 +16,9 @@
       "error": "Failed to delete post. Please try again.",
       "success": "Post deleted successfully!"
     },
-    "fetchError": "Error fetching posts. Please try again.",
+    "fetchError": "Error fetching posts. Please refresh the page.",
+    "noPosts": "No posts yet. Create your first post!",
+    "postNotFound": "Post not found.",
     "update": {
       "buttonText": "Update Post",
       "cancelEdit": "Cancel",

@@ -14,7 +14,7 @@
         </AppLink>
 
         <AppButton
-          title="Delete post"
+          data-cy="delete-post-button"
           :key="`${isLoading}`"
           :is-loading="isLoading"
           class="text-red-400"
@@ -37,18 +37,16 @@ import { useRouter } from 'vue-router';
 import { push } from 'notivue';
 import { useQueryClient } from '@tanstack/vue-query';
 
-import AppPopover from '@/components/ui/AppPopover.vue';
+import AppPopover from '@/components/ui/AppPopover/AppPopover.vue';
 import { deletePost } from '@/services/post/deletePost';
-import { ThreeDots, EditIcon, ThrashIcon } from '@/assets/icons';
-import AppButton from '@/components/ui/AppButton.vue';
-import AppLink from '@/components/ui/AppLink.vue';
-import { type Post } from '@/types/Post';
+import AppButton from '@/components/ui/AppButton/AppButton.vue';
+import AppLink from '@/components/ui/AppLink/AppLink.vue';
 import { t } from '@/localization/translate';
 import { useAppMutation } from '@/composables/useAppMutation';
+import { type Post } from '@/types/Post';
+import { ThreeDots, EditIcon, ThrashIcon } from '@/assets/icons';
 
-const { post } = defineProps<{
-  post: Post;
-}>();
+const { post } = defineProps<{ post: Post }>();
 const router = useRouter();
 const queryClient = useQueryClient();
 const popoverVisible = ref(false);

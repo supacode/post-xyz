@@ -24,12 +24,10 @@
 <script setup lang="ts">
 import { type Post } from '@/types/Post';
 import MarkdownViewer from '@/components/MarkdownViewer.vue';
-import AppLink from '@/components/ui/AppLink.vue';
+import AppLink from '@/components/ui/AppLink/AppLink.vue';
 import PostCardPopover from '@/features/post/PostCardPopover.vue';
 
-const { post } = defineProps<{
-  post: Post;
-}>();
+const { post } = defineProps<{ post: Post }>();
 
 const postLink = `/posts/${post.id}`;
 </script>

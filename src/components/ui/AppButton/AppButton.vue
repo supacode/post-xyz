@@ -20,25 +20,28 @@
 </template>
 
 <script setup lang="ts">
-import { computed, useSlots, withDefaults } from 'vue';
+import { computed, useSlots } from 'vue';
 import { HalfCircle } from '@/assets/icons/';
 
 const slots = useSlots();
 const hasIcon = !!slots.icon;
 
-const { title, isLoading, onClick, variant } = withDefaults(
+const { isLoading, onClick, title, variant } = withDefaults(
   defineProps<{
     title?: string;
-    onClick?: () => void;
     isLoading?: boolean;
+    onClick?: () => void;
     variant?: 'primary' | 'secondary' | 'danger' | 'warning' | 'ghost';
   }>(),
   {
-    variant: 'primary',
+    title: '',
     isLoading: false,
     onClick: () => {},
+    variant: 'primary',
   },
 );
+
+console.log({ title });
 
 const buttonClasses = computed(() => {
   const baseClasses =

@@ -18,22 +18,6 @@ describe('Blog Operations', () => {
     cy.contains('New Cypress Post').should('exist');
   });
 
-  it('Deletes a blog post', () => {
-    cy.get('h2')
-      .first()
-      .invoke('text')
-      .then((postTitle) => {
-        cy.get('[aria-label="popover"]:first button').click();
-        cy.get('[aria-label="Delete post"]').click();
-
-        cy.get('[data-notivue="success"]').should('exist');
-
-        cy.url().should('eq', landingPage);
-
-        cy.contains(postTitle).should('not.exist');
-      });
-  });
-
   it('Updates an existing blog post', () => {
     cy.get('[aria-label="popover"]:first button').click();
     cy.get('[aria-label="Edit Post"]').click();
@@ -63,6 +47,29 @@ describe('Blog Operations', () => {
         cy.url().should('include', '/posts/');
 
         cy.get('h2').should('contain.text', postTitle);
+      });
+  });
+
+  it('Deletes a blog post', () => {
+    cy.get('h2')
+      .first()
+      .invoke('text')
+      .then((postTitle) => {
+        const titleToDelete = postTitle;
+
+        cy.get('[aria-label="popover"]:first button').click();
+
+        cy.get('[data-cy="delete-post-button"]').click();
+
+        cy.on('window:confirm', () => true);
+
+        cy.get('[data-notivue="success"]').should('exist');
+
+        cy.url().should('eq', landingPage);
+
+        setTimeout(() => {
+          cy.get('h2').should('not.contain', titleToDelete);
+        }, 2000);
       });
   });
 });

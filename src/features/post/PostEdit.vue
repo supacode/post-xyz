@@ -51,15 +51,15 @@ import { useRouter, useRoute } from 'vue-router';
 import { push } from 'notivue';
 
 import { PenIcon } from '@/assets/icons';
-import AppInput from '@/components/ui/AppInput.vue';
-import AppButton from '@/components/ui/AppButton.vue';
+import AppInput from '@/components/ui/AppInput/AppInput.vue';
+import AppButton from '@/components/ui/AppButton/AppButton.vue';
 import WysiWyg from '@/components/WysiWyg.vue';
 import { updatePost } from '@/services/post/updatePost';
 import ArrowBack from '@/assets/icons/ArrowBack.vue';
 import { useGetPost } from '@/features/post/composables/useGetPost';
 import PostDetailsSkeleton from '@/features/post/PostDetailsSkeleton.vue';
 import { useAppMutation } from '@/composables/useAppMutation';
-import AppLink from '@/components/ui/AppLink.vue';
+import AppLink from '@/components/ui/AppLink/AppLink.vue';
 import { t } from '@/localization/translate';
 
 const postTitle = ref('');

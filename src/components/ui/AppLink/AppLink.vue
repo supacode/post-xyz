@@ -23,7 +23,7 @@ import { RouterLink } from 'vue-router';
 const slots = useSlots();
 const hasIcon = !!slots.icon;
 
-const { title, to, href, target, variant } = withDefaults(
+const props = withDefaults(
   defineProps<{
     title?: string;
     to?: string;
@@ -31,10 +31,10 @@ const { title, to, href, target, variant } = withDefaults(
     target?: string;
     variant?: 'primary' | 'secondary' | 'danger' | 'warning' | 'ghost';
   }>(),
-  {
-    variant: 'primary',
-  },
+  { variant: 'primary' },
 );
+
+const { title, to, href, target, variant } = props;
 
 const elementClasses = computed(() => {
   const baseClasses =

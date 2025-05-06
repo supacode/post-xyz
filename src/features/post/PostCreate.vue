@@ -34,8 +34,8 @@ import { useRouter } from 'vue-router';
 import { push } from 'notivue';
 
 import { PenIcon } from '@/assets/icons';
-import AppInput from '@/components/ui/AppInput.vue';
-import AppButton from '@/components/ui/AppButton.vue';
+import AppInput from '@/components/ui/AppInput/AppInput.vue';
+import AppButton from '@/components/ui/AppButton/AppButton.vue';
 import WysiWyg from '@/components/WysiWyg.vue';
 import { createPost as createPostService } from '@/services/post/createPost';
 import TrashIcon from '@/assets/icons/TrashIcon.vue';
@@ -47,11 +47,7 @@ const postTitle = ref('');
 const postContent = ref('');
 
 const { isLoading, mutate } = useAppMutation({
-  mutationFn: () =>
-    createPostService({
-      title: postTitle.value,
-      body: postContent.value,
-    }),
+  mutationFn: () => createPostService({ title: postTitle.value, body: postContent.value }),
   onSuccess: () => {
     push.success(t('postActions.create.success'));
     router.push('/');

@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeEach } from 'vitest';
 import { mount } from '@vue/test-utils';
-import AppPopover from '../AppPopover.vue';
+import AppPopover from './AppPopover.vue';
 import {} from 'process';
 
 describe('AppPopover', () => {
@@ -8,10 +8,7 @@ describe('AppPopover', () => {
 
   beforeEach(() => {
     wrapper = mount(AppPopover, {
-      slots: {
-        trigger: `<button>abc</button>`,
-        content: '<div>content</div>',
-      },
+      slots: { trigger: `<button>abc</button>`, content: '<div>content</div>' },
     });
   });
 
